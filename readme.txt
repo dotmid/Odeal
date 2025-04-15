@@ -1,16 +1,11 @@
 SULAIMAN AHMID KAMARA
-101284058
 
-ODEAL DISCOGRAPHY WEB PAGE
-----------------------------
+ODEAL DISCOGRAPHY WEB APPLICATION
+---------------------------------
 The Odeal Discography web application is a platform designed to explore the music catalog of the artist Odeal. 
 Built using Flask and SQLite, it offers features such as browsing albums, viewing songs, reading lyrics, exploring collaborations,
 and managing personal favorite tracks. Users must register and log in to access the full functionality of the site, creating a personalized 
 experience.
-
-*** login For TAs when grading ***
-Username: TA
-password: 12345
 
 *** Youtube link***
 https://youtu.be/w70WbAdPjFg
