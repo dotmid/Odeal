@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Favourite Songs</h1>
+    <ul class="list-group">
+        {% for favourite in favourites %}
+            <li class="list-group-item">
+                <a href="{{ url_for('song_details', song_id=favourite['song_id']) }}">{{ favourite['song_title'] }}</a>
+                <form action="{{ url_for('remove_favourite') }}" method="post" style="display:inline;">
+                    <input type="hidden" name="favourite_id" value="{{ favourite['favourite_id'] }}">
+                    <input type="hidden" name="user_id" value="{{ user_id }}">
+                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

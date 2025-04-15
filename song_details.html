@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ song['song_title'] }}</h1>
+    <p>Track Number: {{ song['track_number'] }}</p>
+    <p>Duration: {{ song['duration'] }}</p>
+    <p>Producer: {{ song['producer'] }}</p>
+    <p>Album: <a href="{{ url_for('album_details', album_id=song['album_id']) }}">{{ song['album_name'] }}</a></p>
+    
+    <h2>Lyrics</h2>
+    <p>{{ lyrics['lyrics_text'] }}</p>
+
+    <form action="{{ url_for('add_favourite') }}" method="post">
+        <input type="hidden" name="song_id" value="{{ song['song_id'] }}">
+        <input type="hidden" name="user_id" value="1">
+        <button type="submit" class="btn btn-primary">Add to Favourites</button>
+    </form>
+{% endblock %}

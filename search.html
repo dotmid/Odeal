@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Search Results</h1>
+    <form method="post" action="{{ url_for('search') }}" class="form-inline mb-3">
+        <input type="text" name="search_term" class="form-control mr-2" placeholder="Enter search term..." required>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if results %}
+        {% if results.songs %}
+            <h2>Song Results</h2>
+            <ul class="list-group mt-4">
+                {% for song in results.songs %}
+                    <li class="list-group-item">
+                        <a href="{{ url_for('song_details', song_id=song['song_id']) }}">{{ song['song_title'] }}</a>
+                        (Album: <a href="{{ url_for('album_details', album_id=song['album_id']) }}">{{ song['album_name'] }}</a>)
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if results.albums %}
+            <h2>Album Results</h2>
+            <ul class="list-group mt-4">
+                {% for album_result in results.albums %}
+                    <li class="list-group-item">
+                        <strong><a href="{{ url_for('album_details', album_id=album_result.album['album_id']) }}">{{ album_result.album['album_name'] }}</a></strong>
+                        <ul>
+                            {% for song in album_result.songs %}
+                                <li><a href="{{ url_for('song_details', song_id=song['song_id']) }}">{{ song['song_title'] }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if results.collaborations %}
+            <h2>Collaborations</h2>
+            <ul class="list-group mt-4">
+                {% for collab in results.collaborations %}
+                    <li class="list-group-item">
+                        <a href="{{ url_for('song_details', song_id=collab['song_id']) }}">{{ collab['song_title'] }}</a>
+                        (Collaborator: {{ collab['artist_name'] }}, Album: <a href="{{ url_for('album_details', album_id=collab['album_id']) }}">{{ collab['album_name'] }}</a>)
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if results.producers %}
+            <h2>Produced by "{{ search_term }}"</h2>
+            <ul class="list-group mt-4">
+                {% for song in results.producers %}
+                    <li class="list-group-item">
+                        <a href="{{ url_for('song_details', song_id=song['song_id']) }}">{{ song['song_title'] }}</a>
+                        (Album: <a href="{{ url_for('album_details', album_id=song['album_id']) }}">{{ song['album_name'] }}</a>)
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% else %}
+        <p>No results found for "{{ search_term }}"</p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mt-4">Back to Home</a>
+{% endblock %}

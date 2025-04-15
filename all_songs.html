@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>All Songs</h1>
+    <form method="post" action="{{ url_for('all_songs') }}" class="form-inline mb-3">
+        <label for="filter_type" class="mr-2">Filter by:</label>
+        <select name="filter_type" id="filter_type" class="form-control mr-2">
+            <option value="album">Album</option>
+            <option value="producer">Producer</option>
+        </select>
+        <input type="text" name="filter_value" class="form-control mr-2" placeholder="Enter value..." required>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    <ul class="list-group">
+        {% for song in songs %}
+            <li class="list-group-item">
+                <a href="{{ url_for('song_details', song_id=song['song_id']) }}">{{ song['song_title'] }}</a>
+                (Album: <a href="{{ url_for('album_details', album_id=song['album_id']) }}">{{ song['album_name'] }}</a>)
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

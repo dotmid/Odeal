@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ album['album_name'] }}</h1>
+    <p>Released: {{ album['release_date'] }}</p>
+    <p>Producer: {{ album['producer'] }}</p>
+
+    <h2>Songs</h2>
+    <ul class="list-group">
+        {% for song in songs %}
+            <li class="list-group-item">
+                <a href="{{ url_for('song_details', song_id=song['song_id']) }}">{{ song['song_title'] }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

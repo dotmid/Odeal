@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Collaborations</h1>
+    <ul class="list-group">
+        {% for collaboration in collaborations %}
+            <li class="list-group-item">
+                <a href="{{ url_for('song_details', song_id=collaboration['song_id']) }}">{{ collaboration['song_title'] }}</a> 
+                - Collaborated with: {{ collaboration['artist_name'] }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
